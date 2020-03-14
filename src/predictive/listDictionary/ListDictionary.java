@@ -39,7 +39,7 @@ public class ListDictionary implements Dictionary {
 				String nextString = scanner.nextLine(); // store the dictionary word in a variable
 				if(PredictivePrototype.isValidWord(nextString)) { // if the dictionary word is valid
 					WordSig wordSigObject = new WordSig(nextString, // create (word, signature) pair object
-							PredictivePrototype.wordToSignature(nextString)); 	
+														PredictivePrototype.wordToSignature(nextString)); 	
 					dictionaryList.add(wordSigObject); // add pair object to the ArrayList
 				}
 			}
@@ -57,7 +57,7 @@ public class ListDictionary implements Dictionary {
 	 * @param index, is the index of the WordSig object in the ArrayList, as int.
 	 */
 	private void addPossibleWord(Set<String> set, int index) {
-		String dictionaryWord = dictionaryList.get(index).getWords().toLowerCase();
+		String dictionaryWord = dictionaryList.get(index).getWord().toLowerCase();
 		set.add(dictionaryWord);
 	}
 

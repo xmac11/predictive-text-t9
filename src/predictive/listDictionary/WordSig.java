@@ -8,7 +8,7 @@ package predictive.listDictionary;
  */
 public class WordSig implements Comparable<WordSig> {
 	
-	private String words;
+	private String word;
 	private String signature;
 
 	/**
@@ -17,15 +17,15 @@ public class WordSig implements Comparable<WordSig> {
 	 * @param signature, is the signature corresponding to word, as String.
 	 */
 	public WordSig(String words, String signature) {
-		this.words = words;
+		this.word = words;
 		this.signature = signature;
 	}	
 	
 	/**
 	 * getter for the words
 	 */
-	public String getWords() {
-		return words;
+	public String getWord() {
+		return word;
 	}
 	 
 	/**
@@ -44,6 +44,35 @@ public class WordSig implements Comparable<WordSig> {
 	 */
 	@Override
 	public int compareTo(WordSig ws) {
+		if (this.signature.length() > ws.signature.length())
+			return 1;
+		if (this.signature.length() < ws.signature.length())
+			return -1;
+
+		// if (this.signature.length()==other.signature.length())
 		return this.signature.compareTo(ws.signature);
 	}
+	
+	/*
+	 * Various compareTo methods.
+	 */
+
+	/*public int compareToBad(WordSig other) {
+		// will not be in numerical order
+		return this.signature.compareTo(other.signature);
+	}
+
+	public int compareToo(WordSig other) {
+		java.math.BigInteger thisSig = new java.math.BigInteger(this.signature);
+		java.math.BigInteger otherSig = new java.math.BigInteger(other.signature);
+
+		return thisSig.compareTo(otherSig);
+	}
+
+	public int compareToïï(WordSig other) {
+		Double thisSig = Double.parseDouble(signature);
+		Double otherSig = Double.parseDouble(other.signature);
+
+		return thisSig.compareTo(otherSig);
+	}*/
 }

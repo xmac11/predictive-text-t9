@@ -26,7 +26,7 @@ public class PredictivePrototype {
 					put('w', '9'); put('x', '9'); put('y', '9'); put('z', '9');
 			}};
 	
-	private static String filename = "words";
+	private static String filename = "dictionaries/words";
 	
 	/**
 	 * Helper method which evaluates whether a character is alphabetic.

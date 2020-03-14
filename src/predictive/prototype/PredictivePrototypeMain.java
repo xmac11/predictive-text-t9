@@ -29,7 +29,7 @@ public class PredictivePrototypeMain {
 			}};
 	
 	//private static Set<String> setOfPossibleWords;
-	private static String filename = "words";
+	private static String filename = "dictionaries/words";
 	
 	/**
 	 * Helper method which evaluates whether a character is alphabetic.
@@ -169,7 +169,7 @@ public class PredictivePrototypeMain {
 	
 	public static void main(String[] args) {
 		//createCharMaps();
-		//System.out.println(wordToSignature("don't"));
+		System.out.println(wordToSignature("don't"));
 		//System.out.println(isValidWord("hOme!"));
 		//System.out.println(isValidWord("ho;e"));
 		System.out.println(signatureToWords("329"));	

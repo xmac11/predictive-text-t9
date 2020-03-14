@@ -40,7 +40,7 @@ public class Sigs2WordsList {
 			System.out.println("No signature provided");
 		}
 		else {
-			ListDictionary dictionaryObject = new ListDictionary("words"); // create dictionaryObject for the "words" dictionary
+			ListDictionary dictionaryObject = new ListDictionary("dictionaries/words"); // create dictionaryObject for the "words" dictionary
 			long start = System.currentTimeMillis();
 			for(int i = 0; i < args.length; i++) {			
 				System.out.println(args[i] + " : " + dictionaryObject.signatureToWords(args[i]));

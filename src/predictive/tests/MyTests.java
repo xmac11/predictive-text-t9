@@ -28,16 +28,16 @@ public class MyTests {
 
 	@Before
 	public void setUp() throws Exception {
-		wordsListDictionary = new ListDictionary("words");
-		myListDictionary =  new ListDictionary("myDictionary.txt");
-		emptyListDictionary =  new ListDictionary("emptyDictionary.txt");
+		wordsListDictionary = new ListDictionary("dictionaries/words");
+		myListDictionary =  new ListDictionary("dictionaries/myDictionary.txt");
+		emptyListDictionary =  new ListDictionary("dictionaries/emptyDictionary.txt");
 
-		wordsMapDictionary = new MapDictionary("words");
-		myMapDictionary = new MapDictionary("myDictionary.txt");
-		emptyMapDictionary = new MapDictionary("emptyDictionary.txt");
+		wordsMapDictionary = new MapDictionary("dictionaries/words");
+		myMapDictionary = new MapDictionary("dictionaries/myDictionary.txt");
+		emptyMapDictionary = new MapDictionary("dictionaries/emptyDictionary.txt");
 
-		myTreeDictionary = new TreeDictionary("myTreeDictionary.txt");
-		emptyTreeDictionary = new TreeDictionary("emptyDictionary.txt");
+		myTreeDictionary = new TreeDictionary("dictionaries/myTreeDictionary.txt");
+		emptyTreeDictionary = new TreeDictionary("dictionaries/emptyDictionary.txt");
 	}
 
 	/********************
@@ -118,7 +118,7 @@ public class MyTests {
 	// test myDictionary
 	@Test
 	public void test8() {
-		PredictivePrototype.setFilename("myDictionary.txt");
+		PredictivePrototype.setFilename("dictionaries/myDictionary.txt");
 		// test signatureToWords("364")
 		Set<String> expectedSet = new HashSet<>();
 		expectedSet.add("dog");

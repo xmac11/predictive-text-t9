@@ -26,24 +26,6 @@ public class MapDictionary implements Dictionary {
 	private Map<String, Set<String>> signatureToWordsMap;
 	
 	/**
-	 * Helper method  which adds a (signature, word) pair to HashMap of (signature, setOfWords)
-	 * @param signature, is the key of the HashMap.
-	 * @param word, is the value to be added to the set of words corresponding to the signature.
-	 */
-	private void addToHashMap(String signature, String word) {		
-		// if the key signature already exists
-		if(signatureToWordsMap.containsKey(signature)) {
-			signatureToWordsMap.get(signature).add(word); // add word to corresponding set
-		}
-		// else create a new set, add the word and put it in the HashMap
-		else {
-			Set<String> setOfPossibleWords = new HashSet<>();
-			setOfPossibleWords.add(word);
-			signatureToWordsMap.put(signature, setOfPossibleWords);
-		}
-	}
-	
-	/**
 	 * Constructor which takes a String path to the dictionary, reads it 
 	 * and stores it in a HashMap of (signature, setOfWords).
 	 * @param path, is the path to a dictionary as String.
@@ -64,6 +46,24 @@ public class MapDictionary implements Dictionary {
 		}
 		catch(IOException e) {
 			System.out.println("File not found");
+		}
+	}
+	
+	/**
+	 * Helper method  which adds a (signature, word) pair to HashMap of (signature, setOfWords)
+	 * @param signature, is the key of the HashMap.
+	 * @param word, is the value to be added to the set of words corresponding to the signature.
+	 */
+	private void addToHashMap(String signature, String word) {		
+		// if the key signature already exists
+		if(signatureToWordsMap.containsKey(signature)) {
+			signatureToWordsMap.get(signature).add(word); // add word to corresponding set
+		}
+		// else create a new set, add the word and put it in the HashMap
+		else {
+			Set<String> setOfPossibleWords = new HashSet<>();
+			setOfPossibleWords.add(word);
+			signatureToWordsMap.put(signature, setOfPossibleWords);
 		}
 	}
 	

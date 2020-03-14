@@ -23,78 +23,6 @@ public class TreeDictionary implements Dictionary {
 	private boolean isEmpty;
 	
 	/**
-	 * Recursive helper method  which adds a (signature, word) pair to a Tree Data Structure.
-	 * Each node of the tree contains a collection of all the words that can possibly be created by the partial 
-	 * signature along the path, as well an Array of size 8 containing its subtrees.
-	 * @param signature, is the signature of a word (and all its sub-signatures).
-	 * @param word, is the word corresponding to a signature (and its sub-signatures).
-	 */
-	private void addToTree(String signature, String word) {
-		// base case
-		if(signature.isEmpty()) {
-			return;
-		}
-		// general case
-		else {
-			int lengthOfSignature = signature.length(); // length of signature
-			String firstChar = signature.substring(0, 1); // first character of signature (2-9)
-			int index = Integer.parseInt(firstChar) - 2; // index to be stored in the array (0-7) 
-
-			// pointer to current node
-			TreeDictionary currentNode = getChildren()[index];
-
-			// create children for an empty node since a word will be added 
-			if(currentNode.isEmpty) {
-				currentNode.createChildren();
-				currentNode.isEmpty = false;
-			}
-			currentNode.getWordsSet().add(word); //add word to set
-			
-
-			// continue recursively for the sub tree, with the substring of the signature and the same word
-			String substring = signature.substring(1, lengthOfSignature);	
-			currentNode.addToTree(substring, word);
-		}		
-	}
-	
-	/**
-	 * Constructor which creates TreeDictionary objects by creating an empty array for the 
-	 * children and an empty set for the words.
-	 */
-	private TreeDictionary() {
-		this.children = new TreeDictionary[8];
-		this.wordsSet = new HashSet<>();
-		this.isEmpty = true;
-	}
-	
-	/**
-	 * Method which loops through the children of a TreeDictionary object (which are null at 
-	 * that point) and creates new TreeDictionary objects for each one of them, i.e. new children
-	 * and an empty set of words.
-	 */
-	private void createChildren() {
-		for(int i = 0; i < 8; i++) {
-			children[i] = new TreeDictionary();
-		}
-	}
-	
-	/**
-	 * getter for the set of words
-	 * @return the set of words corresponding to a node (TreeDictionary object)
-	 */
-	public Set<String> getWordsSet() {
-		return wordsSet;
-	}
-	
-	/**
-	 * getter for the children
-	 * @return the children of a node (TreeDictionary object) of type TreeDictionary[]
-	 */
-	public TreeDictionary[] getChildren() {
-		return children;
-	}
-	
-	/**
 	 * Constructor which takes a String path to the dictionary, reads it and stores it in a Tree Data Structure.
 	 * Each node of the tree contains a collection of all the words that can possibly be created by the partial 
 	 * signature along the path as well an Array of size 8 containing its subtrees.
@@ -123,6 +51,62 @@ public class TreeDictionary implements Dictionary {
 		catch(IOException e) {
 			System.out.println("File not found");
 		}
+	}
+	
+	/**
+	 * Method which loops through the children of a TreeDictionary object (which are null at 
+	 * that point) and creates new TreeDictionary objects for each one of them, i.e. new children
+	 * and an empty set of words.
+	 */
+	private void createChildren() {
+		for(int i = 0; i < 8; i++) {
+			children[i] = new TreeDictionary();
+		}
+	}
+	
+	/**
+	 * Constructor which creates TreeDictionary objects by creating an empty array for the 
+	 * children and an empty set for the words.
+	 */
+	private TreeDictionary() {
+		this.children = new TreeDictionary[8];
+		this.wordsSet = new HashSet<>();
+		this.isEmpty = true;
+	}
+	
+	/**
+	 * Recursive helper method  which adds a (signature, word) pair to a Tree Data Structure.
+	 * Each node of the tree contains a collection of all the words that can possibly be created by the partial 
+	 * signature along the path, as well an Array of size 8 containing its subtrees.
+	 * @param signature, is the signature of a word (and all its sub-signatures).
+	 * @param word, is the word corresponding to a signature (and its sub-signatures).
+	 */
+	private void addToTree(String signature, String word) {
+		// base case
+		if(signature.isEmpty()) {
+			return;
+		}
+		// general case
+		else {
+			String firstChar = signature.substring(0, 1); // first character of signature (2-9)
+			int index = Integer.parseInt(firstChar) - 2; // index to be stored in the array (0-7) 
+
+			// pointer to current node
+			TreeDictionary currentNode = children[index];
+
+			// create children for an empty node since a word will be added 
+			if(currentNode.isEmpty) {
+				currentNode.createChildren();
+				currentNode.isEmpty = false;
+			}
+			currentNode.wordsSet.add(word); //add word to set
+			
+
+			// continue recursively for the sub tree, with the substring of the signature and the same word
+			int lengthOfSignature = signature.length(); // length of signature
+			String substring = signature.substring(1, lengthOfSignature);	
+			currentNode.addToTree(substring, word);
+		}		
 	}
 	
 	/**
@@ -160,18 +144,18 @@ public class TreeDictionary implements Dictionary {
 			// base case 
 			else if(signature.length() == 1) {
 				int index = Integer.parseInt(signature) - 2;
-				return getChildren()[index].getWordsSet();
+				return children[index].wordsSet;
 			}
 			// general case
 			else {
-				int lengthOfSignature = signature.length(); // length of signature
 				String firstChar = signature.substring(0, 1); // first character of signature (2-9)
 				int index = Integer.parseInt(firstChar) - 2; // index to be stored in the array (0-7) 
 				
 				// pointer to current node
-				TreeDictionary currentNode = getChildren()[index];
+				TreeDictionary currentNode = children[index];
 				
 				//continue recursively for the sub tree, with the substring of the signature
+				int lengthOfSignature = signature.length(); // length of signature
 				String substring = signature.substring(1, lengthOfSignature);							 
 				return currentNode.signatureToWordsHelper(substring);			
 			}
@@ -189,13 +173,15 @@ public class TreeDictionary implements Dictionary {
 	 * equal to the length of the required signature.
 	 */
 	private Set<String> trimWords(Set<String> set, int length){
+		if(set.isEmpty()) {
+			return set;
+		}
+		
 		Set<String> trimSet = new HashSet<>();
-		if(!set.isEmpty()) {
-			for(String s: set) {
-				String trimmed = s.substring(0, length);
-				trimSet.add(trimmed);
-			}	
-		}		
+		for(String s: set) {
+			String trimmed = s.substring(0, length);
+			trimSet.add(trimmed);
+		}
 		return trimSet;
 	}
 }

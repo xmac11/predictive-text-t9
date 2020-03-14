@@ -52,7 +52,7 @@ public class Sigs2WordsTree {
 			System.out.println("No signature provided");
 		}
 		else {
-			TreeDictionary dictionaryObject = new TreeDictionary("words"); // create dictionaryObject for the "words" dictionary
+			TreeDictionary dictionaryObject = new TreeDictionary("dictionaries/words"); // create dictionaryObject for the "words" dictionary
 			long start = System.currentTimeMillis();
 			for(int i = 0; i < args.length; i++) {			
 				System.out.println(args[i] + " : " + dictionaryObject.signatureToWords(args[i]));

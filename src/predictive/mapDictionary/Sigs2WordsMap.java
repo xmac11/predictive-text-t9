@@ -11,7 +11,7 @@ public class Sigs2WordsMap {
 			System.out.println("No signature provided");
 		}
 		else {
-			MapDictionary dictionaryObject = new MapDictionary("words"); // create dictionaryObject for the "words" dictionary
+			MapDictionary dictionaryObject = new MapDictionary("dictionaries/words"); // create dictionaryObject for the "words" dictionary
 			long start = System.currentTimeMillis();
 			for(int i = 0; i < args.length; i++) {			
 				System.out.println(args[i] + " : " + dictionaryObject.signatureToWords(args[i]));

@@ -39,7 +39,7 @@ public class ListDictionaryMain implements Dictionary {
 				String nextString = scanner.nextLine(); // store the dictionary word in a variable
 				if(PredictivePrototype.isValidWord(nextString)) { // if the dictionary word is valid
 					WordSig wordSigObject = new WordSig(nextString, // create (word, signature) pair
-							PredictivePrototype.wordToSignature(nextString)); 	
+														PredictivePrototype.wordToSignature(nextString)); 	
 					dictionaryList.add(wordSigObject); // add pair to the arrayList
 				}
 			}
@@ -56,7 +56,7 @@ public class ListDictionaryMain implements Dictionary {
 	 * @param index, is the index of the WordSig object in the ArrayList, as int.
 	 */
 	private void addPossibleWord(Set<String> set, int index) {
-		set.add(dictionaryList.get(index).getWords().toLowerCase());
+		set.add(dictionaryList.get(index).getWord().toLowerCase());
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class ListDictionaryMain implements Dictionary {
 	}
 
 	public static void main(String[] args) {
-		ListDictionary ld = new ListDictionary("myDictionary.txt");
+		ListDictionary ld = new ListDictionary("dictionaries/myDictionary.txt");
 
 		System.out.println(ld.signatureToWords("2"));	
 		//System.out.println(ld.signatureToWords("22222222222222222"));	
